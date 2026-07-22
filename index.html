@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Salone Jobs</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <h1>Salone Jobs</h1>
+
+  <form id="job-form">
+    <input type="text" id="title" placeholder="Job title" required>
+    <input type="text" id="poster" placeholder="Your name / business" required>
+    <input type="text" id="district" placeholder="District" required>
+    <input type="text" id="pay" placeholder="Pay (e.g. Le 300,000/month)" required>
+    <input type="text" id ="contact" placeholder="Whatsapp number (e.g. +232 76000000)" required>
+    <input type="text" id="pin" placeholder="Set a 4-digit PIN(to delete later)" required>"4"
+    <select id="category" required>
+    <option value="">Select category</option>
+    <option value="Tech">Tech</option>
+    <option value="Trades">Trades</option>
+    <option value="Agriculture">Agriculture</option>
+    <option value="Retail">Retail</option>
+    <option value="Freelance">Freelance</option>
+    <option value="Informal">Informal</option>
+    <option value="Apprenticeship">Apprenticeship</option></select>
+    <button type="submit">Post Job</button>
+  </form>
+
+  <div id="category-filters"></div>
+  <input type="text" id="district-search" placeholder="Search by district...">
+  <div id="job-list"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="script.js"></script>
+</body>
+</html>
