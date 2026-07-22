@@ -10,6 +10,20 @@ const categories = ["All", "Tech", "Trades", "Agriculture", "Retail", "Freelance
 let activeCategory = "All";
 let districtQuery = "";
 
+const observer = new IntersectionObserver(function (entries) {
+  entries.forEach(function (entry) {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("visible");
+    }
+  });
+});
+
+function observeCards() {
+  document.querySelectorAll(".job-card").forEach(function (card) {
+    observer.observe(card);
+  });
+}
+
 async function loadJobs() {
   const { data, error } = await supabaseClient
     .from("jobs")
@@ -48,28 +62,38 @@ function renderJobs() {
       <p>${job.category} · ${job.pay}</p>
       <a href="https://wa.me/${(job.contact || "").replace(/[^0-9]/g, "")}" target="_blank">Contact on WhatsApp</a>
       <br>
+      <input type="text" class="pin-input" placeholder="Enter PIN" maxlength="4" style="width: 80px;">
       <button type="button" class="delete-btn">Delete</button>
     `;
 
     const deleteBtn = card.querySelector(".delete-btn");
+    const pinInput = card.querySelector(".pin-input");
+
     deleteBtn.addEventListener("click", async function () {
-      const enteredPin = prompt("Enter the 4-digit PIN to delete this listing:");
-      if (enteredPin === null) return; // cancelled
+      const enteredPin = pinInput.value;
+
       if (enteredPin !== job.pin) {
         alert("Incorrect PIN.");
         return;
       }
 
-      const { error } = await supabaseClient.from("jobs").delete().eq("id", job.id);
+      const { error } = await supabaseClient
+        .from("jobs")
+        .delete()
+        .eq("id", job.id);
+
       if (error) {
-        alert("Something went wrong deleting the job.");
+        alert("Something went wrong deleting this job.");
         return;
       }
 
       loadJobs();
     });
+
     jobListDiv.appendChild(card);
   });
+
+  observeCards();
 }
 
 function renderCategoryFilters() {
@@ -126,4 +150,10 @@ form.addEventListener("submit", async function (event) {
 
   form.reset();
   loadJobs();
+});
+const heroPattern = document.querySelector(".hero-pattern");
+
+window.addEventListener("scroll", function () {
+  const scrollY = window.scrollY;
+  heroPattern.style.transform = `translateY(${scrollY * 0.3}px)`;
 });
