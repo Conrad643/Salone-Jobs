@@ -14,6 +14,42 @@
 </header>
 
   <div class="wave-divider"></div>
+  <div id="auth-section">
+  <div id="auth-logged-out">
+    <input type="email" id="auth-email" placeholder="Email">
+    <input type="password" id="auth-password" placeholder="Password">
+    <button type="button" id="signup-btn">Sign Up</button>
+    <button type="button" id="login-btn">Log In</button>
+  </div>
+  <div id="auth-logged-in" class="hidden">
+    <span id="auth-user-email"></span>
+    <button type="button" id="logout-btn">Log Out</button>
+  </div>
+</div>
+  <section class="info-section">
+  <div class="info-block">
+    <h2>What is Salone Jobs?</h2>
+    <p>A simple board connecting Sierra Leonean youth to real jobs, gigs, and apprenticeships — posted by real people, contacted directly on WhatsApp.</p>
+  </div>
+
+  <div class="info-block">
+    <h2>How it works</h2>
+    <div class="steps">
+      <div class="step">
+        <span class="step-number">1</span>
+        <p>Browse jobs by category or search your district</p>
+      </div>
+      <div class="step">
+        <span class="step-number">2</span>
+        <p>Contact the poster directly on WhatsApp</p>
+      </div>
+      <div class="step">
+        <span class="step-number">3</span>
+        <p>Have a job to offer? Post it yourself in seconds</p>
+      </div>
+    </div>
+  </div>
+</section>
 
   <main class="container">
     <form id="job-form">
@@ -42,5 +78,16 @@
   </main>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <div id="chat-widget">
+  <div id="chat-window" class="hidden">
+    <div id="chat-header">Salone Jobs Assistant</div>
+    <div id="chat-messages"></div>
+    <div id="chat-input-area">
+      <input type="text" id="chat-input" placeholder="Ask about jobs...">
+      <button type="button" id="chat-send">Send</button>
+    </div>
+  </div>
+  <button type="button" id="chat-toggle">💬</button>
+</div>
   <script src="script.js"></script>
 </body>
